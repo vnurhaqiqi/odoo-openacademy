@@ -1,0 +1,148 @@
+<odoo>
+    <data>
+        <record id="course_tree_view" model="ir.ui.view">
+            <field name="name">course.tree.view</field>
+            <field name="model">openacademy.course</field>
+            <field name="arch" type="xml">
+                <tree string="Courses">
+                    <field name="name"/>
+                    <field name="course_type"/>
+                    <field name="course_lv"/>
+                    <field name="course_price"/>
+                    <field name="description"/>
+                    <field name="instructor_ids"/>
+                    <field name="capacity"/>
+<!--                    <field name="room_ids"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="course_form_view" model="ir.ui.view">
+            <field name="name">course.form.view</field>
+            <field name="model">openacademy.course</field>
+            <field name="arch" type="xml">
+                <form string="Courses">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="course_type"/>
+                                <field name="course_lv"/>
+                            </group>
+                            <group>
+                                <field name="instructor_ids" widget="many2many_tags"/>
+                                <field name="capacity"/>
+<!--                                <field name="room_ids" widget="many2many_tags"/>-->
+                                <field name="course_price"/>
+                            </group>
+                            <separator string="Course Description"/>
+                            <field name="description" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="instructor_tree_view" model="ir.ui.view">
+            <field name="name">instructor.tree.view</field>
+            <field name="model">openacademy.instructor</field>
+            <field name="arch" type="xml">
+                <tree string="Instructors">
+                    <field name="name"/>
+                    <field name="dob"/>
+                    <field name="related_field"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="instructor_form_view" model="ir.ui.view">
+            <field name="name">instructor.form.view</field>
+            <field name="model">openacademy.instructor</field>
+            <field name="arch" type="xml">
+                <form string="Instructors">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="dob"/>
+                            <field name="related_field"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="room_tree_view" model="ir.ui.view">
+            <field name="name">room.tree.view</field>
+            <field name="model">openacademy.room</field>
+            <field name="arch" type="xml">
+                <tree string="Rooms">
+                    <field name="name"/>
+                    <field name="state"/>
+<!--                    <field name="room_size"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="room_form_view" model="ir.ui.view">
+            <field name="name">room.form.view</field>
+            <field name="model">openacademy.room</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+<!--                            <field name="room_size"/>-->
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="course_action_view" model="ir.actions.act_window">
+            <field name="name">Courses</field>
+            <field name="res_model">openacademy.course</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_nocontent_create">
+                    Add new course!
+                </p>
+            </field>
+        </record>
+
+        <record id="instructor_action_view" model="ir.actions.act_window">
+            <field name="name">Instructors</field>
+            <field name="res_model">openacademy.instructor</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_nocontent_create">
+                    Add new instructor!
+                </p>
+            </field>
+        </record>
+
+        <record id="room_action_view" model="ir.actions.act_window">
+            <field name="name">Rooms</field>
+            <field name="res_model">openacademy.room</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_nocontent_create">
+                    Add new room!
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="course_menu_root" parent="openacademy.menu_root" name="Course"/>
+
+        <menuitem id="course_menu_item" parent="course_menu_root" name="Courses" action="course_action_view"/>
+        <menuitem id="instructor_menu_item" parent="course_menu_root" name="Instructors" action="instructor_action_view"/>
+        <menuitem id="room_menu_item" parent="course_menu_root" name="Rooms" action="room_action_view"/>
+    </data>
+</odoo>
