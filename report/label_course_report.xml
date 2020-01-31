@@ -1,0 +1,11 @@
+<odoo>
+    <data>
+        <report id="label_course_report"
+                model="openacademy.course"
+                string="Course Report"
+                report_type="qweb-pdf"
+                name="openacademy.report_course"
+                file="openacademy.report_course"
+                attachment_use="False"/>
+    </data>
+</odoo>

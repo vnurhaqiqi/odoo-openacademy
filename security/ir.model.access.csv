@@ -4,3 +4,4 @@ access_openacademy_instructor,openacademy.instructor,model_openacademy_instructo
 access_openacademy_room,openacademy.room,model_openacademy_room,,1,1,1,1
 access_openacademy_student,openacademy.student,model_openacademy_student,,1,1,1,1
 access_openacademy_session,openacademy.session,model_openacademy_session,,1,1,1,1
+access_openacademy_wiz_session_report,openacademy.wiz.session.report,model_openacademy_session_report_wizard,,1,1,1,1

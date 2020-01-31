@@ -17,23 +17,26 @@ class Session(models.Model):
         result = super(Session, self).create(vals)
 
         for student in result.student_ids:
-            if student.room_id == False:
-                student.write({'room_id':result.room_id.id})
-            else:
-                raise UserError('Peserta {} sudah memiliki ruangan'.format(student.name))
+            student.write({'room_id':result.room_id.id})
+
+        result.room_id.write({'state':'using'})
 
         return result
 
-    @api.constrains('room_id')
-    def _update_room_state(self):
-        self.room_id.write({'state':'using'})
-
     @api.multi
     def btn_onprogress(self):
-        self.state = 'onprogress'
+        for record in self:
+            record.state = 'onprogress'
 
     @api.multi
     def btn_done(self):
-        self.state = 'done'
-        room_obj = self.env['openacademy.room'].search([('id', '=', self.room_id.id)])
-        room_obj.write({'state':'done'})
+        for record in self:
+            record.state = 'done'
+            room_obj = self.env['openacademy.room'].search([('id', '=', record.room_id.id)])
+            room_obj.write({'state':'done'})
+
+    @api.constrains('student_ids')
+    def _check_student_course_room(self):
+        for student in self.student_ids:
+            if student.room_id != False:
+                raise UserError('Peserta {} sudah memiliki ruangan'.format(student.name))

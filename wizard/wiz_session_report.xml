@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+        <record id="session_report_wizard_form_view" model="ir.ui.view">
+            <field name="name">session_report_wizard_form_view</field>
+            <field name="model">openacademy.session.report.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="date_start"/>
+                        </group>
+                        <group>
+                            <field name="date_end"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="get_report" string="Print" class="oe_highlight" type="object"/>
+                        <button string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="session_report_wizard_action_view" model="ir.actions.act_window">
+            <field name="name">Session Report</field>
+            <field name="res_model">openacademy.session.report.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_session_report"
+                  string="Session Report"
+                  parent="openacademy.menu_session_root"
+                  action="session_report_wizard_action_view"/>
+    </data>
+</odoo>

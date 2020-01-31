@@ -7,6 +7,9 @@
                 <tree string="Sessions">
                     <field name="course_id"/>
                     <field name="student_ids"/>
+                    <field name="room_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
                 </tree>
             </field>
         </record>
@@ -40,11 +43,26 @@
             </field>
         </record>
 
+        <record id="session_custom_search_view" model="ir.ui.view">
+            <field name="name">custom.filter.course.search.view</field>
+            <field name="model">openacademy.session</field>
+            <field name="arch" type="xml">
+                <search string="Course">
+                    <group expand="1" string="Group By">
+                        <filter string="Course" name="group_by_course_id" context="{'group_by':'course_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
         <record id="session_action_view" model="ir.actions.act_window">
             <field name="name">Sessions</field>
             <field name="res_model">openacademy.session</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="session_custom_search_view"/>
+            <field name="context">{'search_default_group_by_course_id':0}</field>
+            <field name="domain">[]</field>
             <field name="help" type="html">
                 <p class="oe_nocontent_create">
                     Add new session!
@@ -52,6 +70,10 @@
             </field>
         </record>
 
-        <menuitem id="menu_session_root" parent="openacademy.menu_root" name="Session" action="session_action_view"/>
+        <menuitem id="menu_session_root" parent="openacademy.menu_root" name="Session"/>
+        <menuitem id="menu_session_item"
+                  action="session_action_view"
+                  parent="menu_session_root"
+                  string="Sessions"/>
     </data>
 </odoo>

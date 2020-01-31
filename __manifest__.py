@@ -32,6 +32,10 @@
         "views/sequence.xml",
         "views/student.xml",
         "views/session.xml",
+        "report/report_course_template.xml",
+        "report/label_course_report.xml",
+        "report/report_session_template.xml",
+        "wizard/wiz_session_report.xml",
     ],
     # only loaded in demonstration mode
     'demo':        [],

@@ -14,6 +14,7 @@ class Student(models.Model):
     phone_number = fields.Char(string='Phone Number')
     email = fields.Char(string='Email')
     room_id = fields.Many2one('openacademy.room', string='Room')
+    image = fields.Binary(string='Image')
 
     @api.model
     def create(self, vals):
